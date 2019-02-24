@@ -1,19 +1,23 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 
-apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion appCompileSdkVersion
+
     defaultConfig {
-        applicationId "com.gokhanaliccii.trendygifs"
         minSdkVersion appMinSdkVersion
         targetSdkVersion appTargetSdkVersion
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        def apiProperties = getApiProperties()
+        buildConfigField "String", "GIPHY_API_KEY", "${apiProperties['giphy_api_key']}"
+        buildConfigField "String", "GIPHY_API_URL", "${apiProperties['giphy_api_url']}"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,12 +31,24 @@ dependencies {
 
     implementation libraries.kotlinStdLib
     implementation libraries.appCompat
-    implementation libraries.constraintLayout
-
-
+    implementation libraries.rxKotlin
+    implementation libraries.rxAndroid
+    implementation libraries.gson
+    implementation libraries.okhttp3
+    implementation libraries.okhttp3Interceptor
+    implementation libraries.retrofit
+    implementation libraries.retrofitRxAdapter
+    implementation libraries.retrofitGsonConverter
 
     testImplementation testLibraries.junit4
+    testImplementation testLibraries.mockK
 
     androidTestImplementation androidTestLibraries.testRunner
     androidTestImplementation androidTestLibraries.espresso
+}
+
+private def getApiProperties() {
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('giphy_api.properties')))
+    return props
 }
