@@ -1,5 +1,6 @@
 package com.gokhanaliccii.trendygifs.domain.di
 
+import android.content.Context
 import com.gokhanaliccii.trendygifs.data.di.RepositoryProvider
 import com.gokhanaliccii.trendygifs.domain.interactor.GetTrendyGifsUseCase
 import com.gokhanaliccii.trendygifs.domain.mapper.GifEntityMapper
@@ -10,9 +11,9 @@ import com.gokhanaliccii.trendygifs.domain.mapper.GifEntityMapper
 
 object InteractorFactory {
 
-    fun getTrendyGifsUseCase(): GetTrendyGifsUseCase {
+    fun getTrendyGifsUseCase(context: Context): GetTrendyGifsUseCase {
         return GetTrendyGifsUseCase(
-            RepositoryProvider.getGifRepository(),
+            RepositoryProvider.getGifRepository(context),
             GifEntityMapper()
         )
     }

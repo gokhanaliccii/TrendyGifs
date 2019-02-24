@@ -29,6 +29,7 @@ class GifListViewModel(
 
                 override fun onError(e: Throwable) {
 
+                    currentIndex = 0
                 }
             })
     }

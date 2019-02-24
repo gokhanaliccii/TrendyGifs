@@ -1,8 +1,10 @@
 package com.gokhanaliccii.trendygifs.data.di
 
+import android.content.Context
 import com.gokhanaliccii.trendygifs.data.GifRepository
 import com.gokhanaliccii.trendygifs.data.api.GiphyApi
 import com.gokhanaliccii.trendygifs.data.api.GiphyApiFactory
+import com.gokhanaliccii.trendygifs.data.source.cache.SharedPrefCacheSource
 import com.gokhanaliccii.trendygifs.data.source.remote.RemoteGifList
 
 /**
@@ -14,8 +16,13 @@ object RepositoryProvider {
 
     private val giphyApi: GiphyApi by lazy { GiphyApiFactory.createGiphyApi() }
 
-    fun getGifRepository(): GifRepository {
+    fun getGifRepository(context: Context): GifRepository {
+        val cacheSource = SharedPrefCacheSource(trendyGifsSharedPreference(context))
         val remoteSource = RemoteGifList(giphyApi)
-        return GifRepository(remoteSource)
+
+        return GifRepository(remoteSource, cacheSource)
     }
+
+    private fun trendyGifsSharedPreference(context: Context) =
+        context.getSharedPreferences("trendy_gif", Context.MODE_PRIVATE)
 }

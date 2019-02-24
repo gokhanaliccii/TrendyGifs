@@ -3,6 +3,7 @@ package com.gokhanaliccii.trendygifs.util.gifloader
 import android.graphics.drawable.ColorDrawable
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.gokhanaliccii.trendygifs.util.getRandomColor
 
@@ -18,6 +19,7 @@ class GlideGifLoader : GifLoader {
         Glide.with(view.context)
             .asGif()
             .load(url)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .apply(randomColoredPlaceHolder)
             .into(view)
     }
