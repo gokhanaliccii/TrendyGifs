@@ -11,6 +11,8 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        def apiProperties = getApiProperties()
+        buildConfigField "String", "GIPHY_API_KEY", "${apiProperties['giphy_api_key']}"
     }
 
     buildTypes {
@@ -40,4 +42,10 @@ dependencies {
 
     androidTestImplementation androidTestLibraries.testRunner
     androidTestImplementation androidTestLibraries.espresso
+}
+
+private def getApiProperties() {
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('apikey.properties')))
+    return props
 }
