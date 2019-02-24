@@ -32,7 +32,7 @@ class GifListFragment : Fragment() {
         val viewBinding = FragmentGifListBinding.bind(view)
         val gifListViewModel = ViewModelProviders.of(this)[GifListViewModel::class.java]
 
-        val gridLayoutManager = GridLayoutManager(context, 2)
+        val gridLayoutManager = GridLayoutManager(context, getColumnCount())
         val gifListAdapter = GifListAdapter(GlideGifLoader())
 
         viewBinding.recyclerViewGif.run {
@@ -46,5 +46,9 @@ class GifListFragment : Fragment() {
             })
 
         gifListViewModel.loadGifs()
+    }
+
+    private fun getColumnCount(): Int {
+        return resources.getInteger(R.integer.trend_list_column_count)
     }
 }
