@@ -25,9 +25,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    kapt kaptLibraries.glide
+    kapt kaptLibraries.archLifeCycle
+
     implementation libraries.kotlinStdLib
     implementation libraries.appCompat
     implementation libraries.constraintLayout
+    implementation libraries.recyclerview
+    implementation libraries.archLifeCycle
+    implementation libraries.glide
 
     testImplementation testLibraries.junit4
 
