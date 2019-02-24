@@ -1,14 +1,15 @@
 package com.gokhanaliccii.trendygifs.ui.list
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gokhanaliccii.trendygifs.R
+import com.gokhanaliccii.trendygifs.core.base.BindableFragment
 import com.gokhanaliccii.trendygifs.databinding.FragmentGifListBinding
 import com.gokhanaliccii.trendygifs.ui.list.adapter.GifListAdapter
 import com.gokhanaliccii.trendygifs.util.gifloader.GlideGifLoader
@@ -16,22 +17,17 @@ import com.gokhanaliccii.trendygifs.util.gifloader.GlideGifLoader
 /**
  * Created by gokhan.alici on 24.02.2019
  */
-class GifListFragment : Fragment() {
+class GifListFragment : BindableFragment<FragmentGifListBinding, GifListViewModel>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_gif_list, container, false)
-    }
+    override val layoutRes: Int
+        get() = R.layout.fragment_gif_list
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override val viewModelFactory: ViewModelProvider.Factory?
+        get() = null
 
-        val viewBinding = FragmentGifListBinding.bind(view)
-        val gifListViewModel = ViewModelProviders.of(this)[GifListViewModel::class.java]
+    override fun getViewModel(): Class<GifListViewModel> = GifListViewModel::class.java
 
+    override fun onViewBindingReady(savedInstanceState: Bundle?) {
         val gridLayoutManager = GridLayoutManager(context, getColumnCount())
         val gifListAdapter = GifListAdapter(GlideGifLoader())
 
@@ -40,12 +36,16 @@ class GifListFragment : Fragment() {
             adapter = gifListAdapter
         }
 
-        gifListViewModel.gifList.observe(this,
+        viewModel.gifList.observe(this,
             Observer {
                 gifListAdapter.updateList(it!!)
             })
+    }
 
-        gifListViewModel.loadGifs()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.loadGifs()
     }
 
     private fun getColumnCount(): Int {

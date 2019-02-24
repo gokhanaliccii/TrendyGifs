@@ -23,7 +23,7 @@ abstract class BindableFragment<VB : ViewDataBinding, VM : ViewModel> : Fragment
     @get:LayoutRes
     protected abstract val layoutRes: Int
 
-    protected abstract val viewModelFactory: ViewModelProvider.Factory
+    protected abstract val viewModelFactory: ViewModelProvider.Factory?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
