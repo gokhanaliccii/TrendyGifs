@@ -8,5 +8,6 @@ import io.reactivex.Single
  * Created by gokhan.alici on 24.02.2019
  */
 interface TrendyGifSource {
+    
     fun getTrendyGifs(request: GetTrendyGifRequest): Single<List<Gif>>
 }
