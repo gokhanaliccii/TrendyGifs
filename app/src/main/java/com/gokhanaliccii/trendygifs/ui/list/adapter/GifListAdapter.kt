@@ -1,16 +1,19 @@
 package com.gokhanaliccii.trendygifs.ui.list.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.gokhanaliccii.trendygifs.R
 import com.gokhanaliccii.trendygifs.domain.model.GifUIItem
+import com.gokhanaliccii.trendygifs.ui.list.adapter.GifListAdapter.GifViewHolder
+import com.gokhanaliccii.trendygifs.util.gifloader.GifLoader
 
 /**
  * Created by gokhan.alici on 24.02.2019
  */
-class GifListAdapter : RecyclerView.Adapter<GifListAdapter.GifViewHolder>() {
+class GifListAdapter(private val gifLoader: GifLoader) : Adapter<GifViewHolder>() {
 
     private var gifItems: MutableList<GifUIItem> = mutableListOf()
 
@@ -24,6 +27,7 @@ class GifListAdapter : RecyclerView.Adapter<GifListAdapter.GifViewHolder>() {
     override fun getItemCount(): Int = gifItems.size
 
     override fun onBindViewHolder(viewHolder: GifViewHolder, index: Int) {
+        gifLoader.loadGif(viewHolder.imageView, gifItems[index].previewGifUrl)
     }
 
     class GifViewHolder(val imageView: ImageView) : RecyclerView.ViewHolder(imageView)
