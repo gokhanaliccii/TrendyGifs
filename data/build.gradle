@@ -13,6 +13,7 @@ android {
 
         def apiProperties = getApiProperties()
         buildConfigField "String", "GIPHY_API_KEY", "${apiProperties['giphy_api_key']}"
+        buildConfigField "String", "GIPHY_API_URL", "${apiProperties['giphy_api_url']}"
     }
 
     buildTypes {
@@ -46,6 +47,6 @@ dependencies {
 
 private def getApiProperties() {
     Properties props = new Properties()
-    props.load(new FileInputStream(new File('apikey.properties')))
+    props.load(new FileInputStream(new File('giphy_api.properties')))
     return props
 }
