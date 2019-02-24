@@ -26,9 +26,17 @@ dependencies {
 
     implementation libraries.kotlinStdLib
     implementation libraries.appCompat
-    implementation libraries.constraintLayout
+    implementation libraries.rxKotlin
+    implementation libraries.rxAndroid
+    implementation libraries.gson
+    implementation libraries.okhttp3
+    implementation libraries.okhttp3Interceptor
+    implementation libraries.retrofit
+    implementation libraries.retrofitRxAdapter
+    implementation libraries.retrofitGsonConverter
 
     testImplementation testLibraries.junit4
+    testImplementation testLibraries.mockK
 
     androidTestImplementation androidTestLibraries.testRunner
     androidTestImplementation androidTestLibraries.espresso
