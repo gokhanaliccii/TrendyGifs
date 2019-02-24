@@ -1,6 +1,6 @@
 # TrendyGifs
 
-Application display trendy gifs using giphy api. Application written on Kotlin programming language with Clean MVVM architecture with databinding. Application has three different app(features), domain and data. Reason of layered structure decrease build time (gradle feature), highly isolated layers and separation of concerns. Currently application has two feature; list trend gif and when clicked on item display it on other page. So I had other features I would change my layer strategy and separate them by feature like login, user-profile, gif-list etc. 
+Application display trendy gifs using giphy api. Application written on Kotlin programming language with Clean MVVM architecture with databinding. Application has three different app(features), domain and data. Reason of layered structure decrease build time (gradle feature), highly isolated layers and separation of concerns. Currently application has two feature; listing trend gifs and show fullscreen of clicked itemon other page. So If I had other features I would change my layer strategy and separate them by feature like login, user-profile, gif-list etc. 
 
 # Development Strategy
 
