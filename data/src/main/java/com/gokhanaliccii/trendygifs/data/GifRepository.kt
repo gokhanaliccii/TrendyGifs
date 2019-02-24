@@ -11,7 +11,7 @@ import io.reactivex.Single
 class GifRepository(
     private val remoteSource: TrendyGifSource
 ) : TrendyGifSource {
-
+    
     override fun getTrendyGifs(request: GetTrendyGifRequest): Single<List<Gif>> {
         return remoteSource.getTrendyGifs(request)
     }
