@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.gokhanaliccii.trendygifs.R
 import com.gokhanaliccii.trendygifs.core.base.BindableFragment
+import com.gokhanaliccii.trendygifs.core.viewmodel.ViewModelFactory
 import com.gokhanaliccii.trendygifs.databinding.FragmentGifListBinding
 import com.gokhanaliccii.trendygifs.ui.list.adapter.GifListAdapter
 import com.gokhanaliccii.trendygifs.util.gifloader.GlideGifLoader
@@ -23,7 +24,7 @@ class GifListFragment : BindableFragment<FragmentGifListBinding, GifListViewMode
         get() = R.layout.fragment_gif_list
 
     override val viewModelFactory: ViewModelProvider.Factory?
-        get() = null
+        get() = ViewModelFactory()
 
     override fun getViewModel(): Class<GifListViewModel> = GifListViewModel::class.java
 

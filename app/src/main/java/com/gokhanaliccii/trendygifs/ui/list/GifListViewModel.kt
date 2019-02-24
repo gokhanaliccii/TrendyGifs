@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.gokhanaliccii.trendygifs.domain.di.InteractorFactory
+import com.gokhanaliccii.trendygifs.domain.interactor.GetTrendyGifsUseCase
 import com.gokhanaliccii.trendygifs.domain.model.GifUIItem
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -11,13 +12,14 @@ import io.reactivex.observers.DisposableSingleObserver
 /**
  * Created by gokhan.alici on 24.02.2019
  */
-class GifListViewModel : ViewModel() {
+class GifListViewModel(
+    private val getTrendyGifsUseCase: GetTrendyGifsUseCase
+) : ViewModel() {
 
     val gifList = MutableLiveData<List<GifUIItem>>()
 
     private var currentIndex = 0
     private val currentGifList = mutableListOf<GifUIItem>()
-    private val getTrendyGifsUseCase = InteractorFactory.getTrendyGifsUseCase()
     private val compositeDisposable = CompositeDisposable()
 
     fun loadGifs() {
