@@ -9,15 +9,19 @@ import com.gokhanaliccii.trendygifs.R
 import com.gokhanaliccii.trendygifs.domain.model.GifUIItem
 import com.gokhanaliccii.trendygifs.ui.list.adapter.GifListAdapter.GifViewHolder
 import com.gokhanaliccii.trendygifs.util.gifloader.GifLoader
+import com.gokhanaliccii.trendygifs.util.recyclerview.ItemClickListener
 
 /**
  * Created by gokhan.alici on 24.02.2019
  */
-class GifListAdapter(private val gifLoader: GifLoader) : Adapter<GifViewHolder>() {
+class GifListAdapter(
+    private val gifLoader: GifLoader,
+    private val itemClickListener: ItemClickListener<GifUIItem>
+) : Adapter<GifViewHolder>() {
 
     private var gifItems: MutableList<GifUIItem> = mutableListOf()
 
-    fun updateList(items: List<GifUIItem>){
+    fun updateList(items: List<GifUIItem>) {
         gifItems.clear()
         gifItems.addAll(items)
         notifyDataSetChanged()
@@ -34,6 +38,10 @@ class GifListAdapter(private val gifLoader: GifLoader) : Adapter<GifViewHolder>(
 
     override fun onBindViewHolder(viewHolder: GifViewHolder, index: Int) {
         gifLoader.loadGif(viewHolder.imageView, gifItems[index].previewGifUrl)
+
+        viewHolder.imageView.setOnClickListener {
+            itemClickListener.onItemClick(gifItems[index], it)
+        }
     }
 
     override fun onViewRecycled(holder: GifViewHolder) {
