@@ -11,4 +11,3 @@ data class Gif(
     @SerializedName("images")
     private val imageTypes: ImageType? = null
 )
-

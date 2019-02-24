@@ -29,7 +29,7 @@ fun <T : Any> toQueryMap(t: T): Map<String, String> {
             val o = field.get(t)
             fieldMap[name] = o.toString()
         } catch (e: IllegalAccessException) {
-
+            e.printStackTrace()
         }
     }
 
