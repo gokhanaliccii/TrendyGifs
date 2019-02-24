@@ -10,7 +10,7 @@ import com.gokhanaliccii.trendygifs.domain.mapper.GifEntityMapper
 
 object InteractorFactory {
 
-    fun getTrendyUsecase(): GetTrendyGifsUseCase {
+    fun getTrendyGifsUseCase(): GetTrendyGifsUseCase {
         return GetTrendyGifsUseCase(
             RepositoryProvider.getGifRepository(),
             GifEntityMapper()

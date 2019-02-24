@@ -21,6 +21,11 @@ fun <T : Any> toQueryMap(t: T): Map<String, String> {
         }
 
         var name = field.name
+
+        // target object is inner class so that param is outer object
+        if (name.contains("$") || "serialVersionUID" == name)
+            continue
+
         if (field.isAnnotationPresent(SerializedName::class.java)) {
             name = field.getAnnotation(SerializedName::class.java).value
         }
@@ -28,7 +33,7 @@ fun <T : Any> toQueryMap(t: T): Map<String, String> {
         try {
             val o = field.get(t)
             fieldMap[name] = o.toString()
-        } catch (e: IllegalAccessException) {
+        } catch (e: Throwable) {
             e.printStackTrace()
         }
     }

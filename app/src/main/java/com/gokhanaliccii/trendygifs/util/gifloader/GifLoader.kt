@@ -9,5 +9,5 @@ interface GifLoader {
 
     fun loadGif(view: ImageView, url: String)
 
-    fun cancelGifLoading(view: ImageView, url: String)
+    fun cancelGifLoading(view: ImageView, url: String?)
 }

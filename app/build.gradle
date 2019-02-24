@@ -21,7 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    
+
     dataBinding.enabled = true
 }
 
@@ -37,6 +37,8 @@ dependencies {
     implementation libraries.recyclerview
     implementation libraries.archLifeCycle
     implementation libraries.glide
+    implementation libraries.rxKotlin
+    implementation libraries.rxAndroid
 
     testImplementation testLibraries.junit4
 

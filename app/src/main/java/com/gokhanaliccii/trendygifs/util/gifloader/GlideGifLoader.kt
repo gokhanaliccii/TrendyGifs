@@ -22,7 +22,7 @@ class GlideGifLoader : GifLoader {
             .into(view)
     }
 
-    override fun cancelGifLoading(view: ImageView, url: String) {
+    override fun cancelGifLoading(view: ImageView, url: String?) {
         Glide.with(view).clear(view)
     }
 }
