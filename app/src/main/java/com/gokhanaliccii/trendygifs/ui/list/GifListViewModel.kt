@@ -1,5 +1,6 @@
 package com.gokhanaliccii.trendygifs.ui.list
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.gokhanaliccii.trendygifs.domain.interactor.GetTrendyGifsUseCase
@@ -15,12 +16,29 @@ class GifListViewModel(
 ) : ViewModel() {
 
     val gifList = MutableLiveData<List<GifUIItem>>()
+    private val mMoreGifsLoading = MutableLiveData<Boolean>()
+    private val mContentGifsLoading = MutableLiveData<Boolean>()
 
     private var currentIndex = 0
     private val currentGifList = mutableListOf<GifUIItem>()
     private val compositeDisposable = CompositeDisposable()
 
+
+    fun moreGifsLoadingObserver(): LiveData<Boolean> {
+        return mMoreGifsLoading
+    }
+
+    fun contentGifsLoadingObserver(): LiveData<Boolean> {
+        return mContentGifsLoading
+    }
+
     fun loadGifs() {
+        if (currentIndex == 0) {
+            mContentGifsLoading.value = true
+        } else {
+            mMoreGifsLoading.value = true;
+        }
+
         getTrendyGifsUseCase.execute(currentIndex,
             object : DisposableSingleObserver<List<GifUIItem>>() {
                 override fun onSuccess(gifList: List<GifUIItem>) {
@@ -28,13 +46,14 @@ class GifListViewModel(
                 }
 
                 override fun onError(e: Throwable) {
-
-                    currentIndex = 0
+                    //todo handle
                 }
             })
     }
 
     private fun onNewGifsLoaded(gifList: List<GifUIItem>) {
+        mContentGifsLoading.value = false
+        mMoreGifsLoading.value = false
         currentIndex++
 
         currentGifList.addAll(gifList)

@@ -18,3 +18,6 @@ fun getRandomColor(): Int {
         rnd.nextInt(MAX_COLOR_CODE)
     )
 }
+
+fun getWhiteColor(): Int =
+    Color.argb(MAX_COLOR_CODE, MAX_COLOR_CODE, MAX_COLOR_CODE, MAX_COLOR_CODE)
