@@ -1,7 +1,8 @@
-package com.gokhanaliccii.trendygifs
+package com.gokhanaliccii.trendygifs.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.gokhanaliccii.trendygifs.R
 
 class MainActivity : AppCompatActivity() {
 
