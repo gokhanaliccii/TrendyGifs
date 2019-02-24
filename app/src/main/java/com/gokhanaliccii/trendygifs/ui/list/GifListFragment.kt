@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.gokhanaliccii.trendygifs.R
-import com.gokhanaliccii.trendygifs.core.base.BindableFragment
+import com.gokhanaliccii.trendygifs.core.base.BindableViewModelFragment
 import com.gokhanaliccii.trendygifs.core.router.GifDetailRouter
 import com.gokhanaliccii.trendygifs.core.viewmodel.ViewModelFactory
 import com.gokhanaliccii.trendygifs.databinding.FragmentGifListBinding
@@ -20,7 +20,7 @@ import com.gokhanaliccii.trendygifs.util.recyclerview.RecyclerViewLoadMoreListen
  * Created by gokhan.alici on 24.02.2019
  */
 class GifListFragment :
-    BindableFragment<FragmentGifListBinding, GifListViewModel>(),
+    BindableViewModelFragment<FragmentGifListBinding, GifListViewModel>(),
     ItemClickListener<GifUIItem> {
 
     override val layoutRes: Int
