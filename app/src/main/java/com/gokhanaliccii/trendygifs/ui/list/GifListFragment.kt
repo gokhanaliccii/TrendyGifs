@@ -27,7 +27,7 @@ class GifListFragment :
         get() = R.layout.fragment_gif_list
 
     override val viewModelFactory: ViewModelProvider.Factory?
-        get() = ViewModelFactory()
+        get() = ViewModelFactory(context!!)
 
     private lateinit var gifDetailRouter: GifDetailRouter
 
