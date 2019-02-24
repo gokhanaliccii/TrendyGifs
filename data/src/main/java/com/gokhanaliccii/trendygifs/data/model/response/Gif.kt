@@ -9,5 +9,5 @@ data class Gif(
     @SerializedName("id")
     val id: String? = null,
     @SerializedName("images")
-    private val imageTypes: ImageType? = null
+    val imageTypes: ImageType? = null
 )
