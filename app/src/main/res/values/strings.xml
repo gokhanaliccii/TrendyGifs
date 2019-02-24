@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TrendyGifs</string>
+
+    <string name="shared_anim">shared_view_anim</string>
 </resources>

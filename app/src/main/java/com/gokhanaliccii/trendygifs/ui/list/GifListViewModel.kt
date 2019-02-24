@@ -1,9 +1,7 @@
 package com.gokhanaliccii.trendygifs.ui.list
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.gokhanaliccii.trendygifs.domain.di.InteractorFactory
 import com.gokhanaliccii.trendygifs.domain.interactor.GetTrendyGifsUseCase
 import com.gokhanaliccii.trendygifs.domain.model.GifUIItem
 import io.reactivex.disposables.CompositeDisposable
