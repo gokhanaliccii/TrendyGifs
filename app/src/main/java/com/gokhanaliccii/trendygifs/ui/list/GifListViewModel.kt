@@ -15,12 +15,16 @@ class GifListViewModel(
     private val getTrendyGifsUseCase: GetTrendyGifsUseCase
 ) : ViewModel() {
 
-    val gifList = MutableLiveData<List<GifUIItem>>()
+    private var currentIndex = 0
+    private val compositeDisposable = CompositeDisposable()
+    private val currentGifList = mutableListOf<GifUIItem>()
+    private val gifList = MutableLiveData<List<GifUIItem>>()
     private val mMoreGifsLoading = MutableLiveData<Boolean>()
     private val mContentGifsLoading = MutableLiveData<Boolean>()
-    private var currentIndex = 0
-    private val currentGifList = mutableListOf<GifUIItem>()
-    private val compositeDisposable = CompositeDisposable()
+
+    fun gifList(): LiveData<List<GifUIItem>> {
+        return gifList
+    }
 
     fun moreGifsLoadingObserver(): LiveData<Boolean> {
         return mMoreGifsLoading

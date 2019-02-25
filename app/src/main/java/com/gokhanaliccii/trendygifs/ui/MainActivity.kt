@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.content_page, GifListFragment())
+                .replace(R.id.content_page, GifListFragment.newInstance())
                 .commit()
         }
     }

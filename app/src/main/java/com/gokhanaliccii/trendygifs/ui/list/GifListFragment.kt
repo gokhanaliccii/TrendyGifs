@@ -25,13 +25,16 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Created by gokhan.alici on 24.02.2019
+ * I need to inject fields like GifRouter, ViewModelFactory
  */
 class GifListFragment :
     BindableViewModelFragment<FragmentGifListBinding, GifListViewModel>(),
     ItemClickListener<GifUIItem> {
 
     companion object {
-        const val COLOR_REFRESH_FREQUENCY = 300L
+        private const val COLOR_REFRESH_FREQUENCY = 300L
+
+        fun newInstance() = GifListFragment()
     }
 
     override val layoutRes: Int
@@ -43,13 +46,6 @@ class GifListFragment :
     private lateinit var gifDetailRouter: GifDetailRouter
     private lateinit var loadMoreListener: RecyclerViewLoadMoreListener
     private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
-
-    @VisibleForTesting
-    fun injectViewModelFactory(unused: ViewModelProvider.Factory) {
-        /** fixme
-         * my purpose was changing viewModelFactory to stubbing view model
-         */
-    }
 
     override fun getViewModel(): Class<GifListViewModel> = GifListViewModel::class.java
 
@@ -65,6 +61,8 @@ class GifListFragment :
 
         loadMoreListener = RecyclerViewLoadMoreListener(gridLayoutManager) {
             viewModel.loadGifs()
+        }.apply {
+            viewBinding.recyclerViewGif.addOnScrollListener(this)
         }
 
         viewBinding.recyclerViewGif.run {
@@ -72,9 +70,7 @@ class GifListFragment :
             adapter = gifListAdapter
         }
 
-        viewBinding.recyclerViewGif.addOnScrollListener(loadMoreListener)
-
-        viewModel.gifList.observe(this,
+        viewModel.gifList().observe(this,
             Observer {
                 gifListAdapter.updateList(it!!)
             })
@@ -115,10 +111,10 @@ class GifListFragment :
         compositeDisposable.add(
             Observable.interval(COLOR_REFRESH_FREQUENCY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { unusued -> showRandomColorOnLoader() })
+                .subscribe { unusued -> showRandomColor() })
     }
 
-    private fun showRandomColorOnLoader() {
+    private fun showRandomColor() {
         viewBinding.contentLoadingVisible = true
         viewBinding.loadingColor = getRandomColor()
     }
@@ -127,5 +123,12 @@ class GifListFragment :
         super.onDestroyView()
 
         viewBinding.recyclerViewGif.removeOnScrollListener(loadMoreListener)
+    }
+
+    @VisibleForTesting
+    fun injectViewModelFactory(unused: ViewModelProvider.Factory) {
+        /** fixme
+         * my purpose was changing viewModelFactory to stubbing view model
+         */
     }
 }
