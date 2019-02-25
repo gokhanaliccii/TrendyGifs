@@ -32,6 +32,8 @@ dependencies {
 
     testImplementation testLibraries.junit4
     testImplementation testLibraries.mockK
+    testImplementation testLibraries.rxKotlin
+    testImplementation testLibraries.rxAndroid
 
     androidTestImplementation androidTestLibraries.testRunner
     androidTestImplementation androidTestLibraries.espresso
