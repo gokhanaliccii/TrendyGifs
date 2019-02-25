@@ -31,4 +31,21 @@ class GifRepositoryTest {
 
         verify { mockCacheSource.saveTrendyGifs(any(), any()) }
     }
+
+  @Test
+    fun shouldProvideGifsFromCacheWhenServiceReturnError() {
+        val mockThrowable = mockk<Throwable>()
+        val mockCacheSource = mockk<SharedPrefCacheSource>(relaxed = true)
+        val mockRemoteSource = mockk<RemoteGifList>(relaxed = true)
+
+        every {
+            mockRemoteSource.getTrendyGifs(any())
+        }.returns(Single.error(mockThrowable))
+
+        val gifRepository = GifRepository(mockRemoteSource, mockCacheSource)
+
+        gifRepository.getTrendyGifs(GetTrendyGifRequest(0)).test()
+
+        verify { mockCacheSource.getTrendyGifs(any()) }
+    }
 }
