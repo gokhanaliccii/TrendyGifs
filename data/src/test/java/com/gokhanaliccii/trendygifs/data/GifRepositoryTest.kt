@@ -4,10 +4,13 @@ import com.gokhanaliccii.trendygifs.data.model.request.GetTrendyGifRequest
 import com.gokhanaliccii.trendygifs.data.model.response.Gif
 import com.gokhanaliccii.trendygifs.data.source.cache.SharedPrefCacheSource
 import com.gokhanaliccii.trendygifs.data.source.remote.RemoteGifList
+import io.mockk.MockKAnnotations
 import io.mockk.every
+import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
 import io.reactivex.Single
+import org.junit.Before
 import org.junit.Test
 
 /**
@@ -15,11 +18,20 @@ import org.junit.Test
  */
 class GifRepositoryTest {
 
+    @MockK(relaxed = true)
+    lateinit var mockCacheSource: SharedPrefCacheSource
+
+    @MockK(relaxed = true)
+    lateinit var mockRemoteSource :RemoteGifList
+
+    @Before
+    fun setUp(){
+        MockKAnnotations.init(this)
+    }
+
     @Test
     fun shouldSaveApiResponseToCacheWhenServiceSuccessfullyReturn() {
         val mockGifList = mockk<List<Gif>>()
-        val mockCacheSource = mockk<SharedPrefCacheSource>(relaxed = true)
-        val mockRemoteSource = mockk<RemoteGifList>(relaxed = true)
 
         every {
             mockRemoteSource.getTrendyGifs(any())
@@ -32,11 +44,9 @@ class GifRepositoryTest {
         verify { mockCacheSource.saveTrendyGifs(any(), any()) }
     }
 
-  @Test
+    @Test
     fun shouldProvideGifsFromCacheWhenServiceReturnError() {
         val mockThrowable = mockk<Throwable>()
-        val mockCacheSource = mockk<SharedPrefCacheSource>(relaxed = true)
-        val mockRemoteSource = mockk<RemoteGifList>(relaxed = true)
 
         every {
             mockRemoteSource.getTrendyGifs(any())
