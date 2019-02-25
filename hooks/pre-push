@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo "static code analyser running"
+codeAnalysisOutput="$(./gradlew detekt)"
+codeAnalysisResult=$?
+
+if [ $codeAnalysisResult == 1 ]; then
+ echo "*****************************************"
+ echo "Detekt static code analyser find problems"
+ echo "failed"
+ echo $codeAnalysisOutput
+ exit 1
+ echo "****************************************"
+fi
+

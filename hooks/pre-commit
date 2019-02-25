@@ -1,0 +1,18 @@
+#/bin/sh
+
+echo "Checking project syntax " 
+
+lintWarning=$(./gradlew ktlint)
+lintResult=$?
+
+if [ $lintResult == 0 ]; then
+ echo "lint check passed"
+else
+ echo "****************************************************"
+ echo "* error occuried please check on klint check        "
+ echo $lintWarning
+ exit $lintResult
+fi
+
+
+
