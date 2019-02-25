@@ -3,6 +3,7 @@ package com.gokhanaliccii.trendygifs.ui.list
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.support.annotation.VisibleForTesting
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.gokhanaliccii.trendygifs.R
@@ -36,9 +37,15 @@ class GifListFragment :
         get() = ViewModelFactory(context!!)
 
     private lateinit var gifDetailRouter: GifDetailRouter
-
     private lateinit var loadMoreListener: RecyclerViewLoadMoreListener
     private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
+
+    @VisibleForTesting
+    fun injectViewModelFactory(unused: ViewModelProvider.Factory) {
+        /** fixme
+         * my purpose was changing viewModelFactory to stubbing view model
+         */
+    }
 
     override fun getViewModel(): Class<GifListViewModel> = GifListViewModel::class.java
 
