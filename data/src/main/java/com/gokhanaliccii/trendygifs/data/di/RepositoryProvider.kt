@@ -14,6 +14,8 @@ import com.gokhanaliccii.trendygifs.data.source.remote.RemoteGifList
 // todo find better name
 object RepositoryProvider {
 
+    private const val FILE_NAME = "trendy_gif"
+
     private val giphyApi: GiphyApi by lazy { GiphyApiFactory.createGiphyApi() }
 
     fun getGifRepository(context: Context): GifRepository {
@@ -24,5 +26,5 @@ object RepositoryProvider {
     }
 
     private fun trendyGifsSharedPreference(context: Context) =
-        context.getSharedPreferences("trendy_gif", Context.MODE_PRIVATE)
+        context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
 }
