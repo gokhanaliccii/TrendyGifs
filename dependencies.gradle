@@ -43,8 +43,10 @@ ext {
     ]
 
     testLibraries = [
-            junit4: "junit:junit:" + junit4Version,
-            mockK : "io.mockk:mockk:" + mockKVersion,
+            junit4   : "junit:junit:" + junit4Version,
+            mockK    : "io.mockk:mockk:" + mockKVersion,
+            rxKotlin : libraries.rxKotlin,
+            rxAndroid: libraries.rxAndroid
     ]
 
     androidTestLibraries = [

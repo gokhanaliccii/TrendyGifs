@@ -36,7 +36,7 @@ class GifListViewModel(
         if (currentIndex == 0) {
             mContentGifsLoading.value = true
         } else {
-            mMoreGifsLoading.value = true;
+            mMoreGifsLoading.value = true
         }
 
         getTrendyGifsUseCase.execute(currentIndex,
