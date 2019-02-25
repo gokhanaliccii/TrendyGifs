@@ -4,9 +4,9 @@ Application display trendy gifs using giphy api. Application written on Kotlin p
 
 Portrait | Landscape |
 --- | --- |
-*![images loading](https://github.com/gokhanaliccii/TrendyGifs/tree/develop/art/ui_portrait..jpg)*|*![images loaded](https://github.com/gokhanaliccii/TrendyGifs/tree/develop/art/ui_landscape.jpg)*
+*![Portrait](https://github.com/gokhanaliccii/TrendyGifs/blob/develop/art/ui_portrait.jpg)*|![Landscape loaded](https://github.com/gokhanaliccii/TrendyGifs/blob/develop/art/ui_landscape.jpg)
 
-# Development Strategy
+## Development Strategy
 
   - Use git flow
   - Integrate ktlint and detekt
@@ -17,9 +17,15 @@ Portrait | Landscape |
   - Develop domain module
   - Develop app module(features)
   
-### Libraries
+  ## Architecture
+app_layer | domain_layer | data_layer |
+--- | --- | --- |
+*![app](https://github.com/gokhanaliccii/TrendyGifs/blob/develop/art/layer_app.png)*|*![domain](https://github.com/gokhanaliccii/TrendyGifs/blob/develop/art/layer_domain.png)*|*![data](https://github.com/gokhanaliccii/TrendyGifs/blob/develop/art/layer_data.png)*|
+  
+Application separeted on the app, domain and data layers. Data layer communicate with giphy api to provide trend gifs and cache service response. Domain layer interact with data layer to provide required information for presentation layer. 
 
-Dillinger uses a number of open source projects to work properly:
+  
+### Libraries
 
 * [RxKotlin](https://github.com/ReactiveX/RxKotlin)
 * [Architecture Components](https://developer.android.com/jetpack)
@@ -32,8 +38,20 @@ Dillinger uses a number of open source projects to work properly:
 
 I wish to use also Dagger and room  but due to time limitation I couldn't use
 
+### How to develop custom GifLoader
+
+Imageview natively doesn't support gifs so to show gif we need to do custom implementation. To display gifs we have several options like using custom libraries(glide,picasso, fresco etc), implementing custom webview or decode gifview and animate each frame on imageview. [Gif decoding approach](https://stackoverflow.com/a/11736861/2608485), [webview approach](https://stackoverflow.com/a/38810732/2608485). If I had enough time I would apply gif decoding approach with using HandlerThread  
+
+### Known Issues
+
+- I should save/restore ui object states on onSaveInstance/onCreate (Process death possibility)
+- I passed context to data layer from ui layer to access sharedPreference which we use save service response. I dislike this approach but I don't enough time to implement better solution like room or realm.
+- I should handle cache mechanism better like expire 
+
 ### Todos
 
  - Write MORE Tests
  - Add animation on page changes
  - Implement Dagger
+ - Custom Gif Loader
+ - Handle exceptions
