@@ -51,6 +51,8 @@ ext {
 
     androidTestLibraries = [
             testRunner: "com.android.support.test:runner:" + testRunnerVersion,
+            testRules : "com.android.support.test:rules:" + testRunnerVersion,
             espresso  : "com.android.support.test.espresso:espresso-core:" + espressoVersion,
+            mockK     : testLibraries.mockK
     ]
 }

@@ -43,7 +43,9 @@ dependencies {
     testImplementation testLibraries.junit4
 
     androidTestImplementation androidTestLibraries.testRunner
+    androidTestImplementation androidTestLibraries.testRules
     androidTestImplementation androidTestLibraries.espresso
+    androidTestImplementation androidTestLibraries.mockK
 
     implementation project(':domain')
 }
