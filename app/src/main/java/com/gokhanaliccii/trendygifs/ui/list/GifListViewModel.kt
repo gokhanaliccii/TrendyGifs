@@ -18,11 +18,9 @@ class GifListViewModel(
     val gifList = MutableLiveData<List<GifUIItem>>()
     private val mMoreGifsLoading = MutableLiveData<Boolean>()
     private val mContentGifsLoading = MutableLiveData<Boolean>()
-
     private var currentIndex = 0
     private val currentGifList = mutableListOf<GifUIItem>()
     private val compositeDisposable = CompositeDisposable()
-
 
     fun moreGifsLoadingObserver(): LiveData<Boolean> {
         return mMoreGifsLoading
@@ -46,7 +44,7 @@ class GifListViewModel(
                 }
 
                 override fun onError(e: Throwable) {
-                    //todo handle
+                    // todo handle
                 }
             })
     }

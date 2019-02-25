@@ -41,7 +41,6 @@ class GifDetailFragment : BindableFragment<FragmentGifDetailBinding>() {
         viewBinding.imageGif
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         gifLoader.cancelGifLoading(viewBinding.imageGif, gifUrl)

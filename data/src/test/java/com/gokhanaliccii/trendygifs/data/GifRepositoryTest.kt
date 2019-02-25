@@ -22,10 +22,10 @@ class GifRepositoryTest {
     lateinit var mockCacheSource: SharedPrefCacheSource
 
     @MockK(relaxed = true)
-    lateinit var mockRemoteSource :RemoteGifList
+    lateinit var mockRemoteSource: RemoteGifList
 
     @Before
-    fun setUp(){
+    fun setUp() {
         MockKAnnotations.init(this)
     }
 

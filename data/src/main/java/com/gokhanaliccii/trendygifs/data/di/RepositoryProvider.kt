@@ -11,7 +11,7 @@ import com.gokhanaliccii.trendygifs.data.source.remote.RemoteGifList
  * Created by gokhan.alici on 24.02.2019
  */
 
-//todo find better name
+// todo find better name
 object RepositoryProvider {
 
     private val giphyApi: GiphyApi by lazy { GiphyApiFactory.createGiphyApi() }

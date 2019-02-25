@@ -1,7 +1,7 @@
 package com.gokhanaliccii.trendygifs.util
 
 import android.graphics.Color
-import java.util.*
+import java.util.Random
 
 /**
  * Created by gokhan.alici on 24.02.2019

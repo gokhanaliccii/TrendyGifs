@@ -33,7 +33,9 @@ fun <T : Any> toQueryMap(t: T): Map<String, String> {
         try {
             val o = field.get(t)
             fieldMap[name] = o.toString()
-        } catch (e: Throwable) {
+        } catch (e: IllegalAccessError) {
+            e.printStackTrace()
+        } catch (e: IllegalArgumentException) {
             e.printStackTrace()
         }
     }

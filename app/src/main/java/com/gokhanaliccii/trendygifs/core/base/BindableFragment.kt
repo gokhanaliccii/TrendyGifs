@@ -21,7 +21,8 @@ abstract class BindableFragment<VB : ViewDataBinding> : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         viewBinding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         onViewBindingReady(savedInstanceState)

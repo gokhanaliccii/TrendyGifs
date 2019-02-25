@@ -18,7 +18,6 @@ import io.mockk.impl.annotations.MockK
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.util.concurrent.CountDownLatch
 
 /**
  * Created by gokhan.alici on 25.02.2019

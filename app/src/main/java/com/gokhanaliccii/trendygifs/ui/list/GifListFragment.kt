@@ -30,6 +30,10 @@ class GifListFragment :
     BindableViewModelFragment<FragmentGifListBinding, GifListViewModel>(),
     ItemClickListener<GifUIItem> {
 
+    companion object {
+        const val COLOR_REFRESH_FREQUENCY = 300L
+    }
+
     override val layoutRes: Int
         get() = R.layout.fragment_gif_list
 
@@ -89,7 +93,6 @@ class GifListFragment :
                 compositeDisposable.clear()
             }
         })
-
     }
 
     override fun onItemClick(gifUIItem: GifUIItem, view: View?) {
@@ -110,9 +113,9 @@ class GifListFragment :
         viewBinding.contentLoadingVisible = true
 
         compositeDisposable.add(
-            Observable.interval(300, TimeUnit.MILLISECONDS)
+            Observable.interval(COLOR_REFRESH_FREQUENCY, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { a -> showRandomColorOnLoader() })
+                .subscribe { unusued -> showRandomColorOnLoader() })
     }
 
     private fun showRandomColorOnLoader() {
